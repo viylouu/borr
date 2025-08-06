@@ -20,14 +20,12 @@ main :: proc() {
 
 module := mod.Module{
     name = "demo",
-    init = nil,
-    unload = nil,
+    dependencies = { "core", "draw" },
     systems = {
         &{ name = "render",
             run = loop
         }
-    },
-    state = nil
+    }
 }
 
 loop :: proc() {

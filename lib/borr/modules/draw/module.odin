@@ -4,6 +4,7 @@ import mod "../modular"
 
 module := mod.Module{
     name = "draw",
+    dependencies = { "core" },
     init = init,
     unload = unload,
     systems = {
