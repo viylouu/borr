@@ -2,6 +2,7 @@ package modular
 
 Module :: struct {
     name: string,
+    dependencies: []string,
     init: proc(),
     unload: proc(),
     systems: []^System,
