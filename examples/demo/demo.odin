@@ -3,11 +3,13 @@ package demo
 import mod "../../lib/borr/modules/modular"
 import "../../lib/borr/modules/core"
 import "../../lib/borr/modules/draw"
+import "../../lib/borr/modules/shader"
 
 main :: proc() {
     mod.app = {
         &core.module,
         &draw.module,
+        &shader.module,
         &module
     }
 
