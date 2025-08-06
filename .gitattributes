@@ -1,0 +1,7 @@
+# /lib/... linguist-detectable=false
+
+*.odin text diff=odin
+*.vert text diff=glsl
+*.frag text diff=glsl
+*.glsl text diff=glsl
+
