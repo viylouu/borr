@@ -2,10 +2,12 @@ package demo
 
 import mod "../../lib/borr/modules/modular"
 import "../../lib/borr/modules/core"
+import "../../lib/borr/modules/draw"
 
 main :: proc() {
     mod.app = {
         &core.module,
+        &draw.module,
         &module
     }
 
@@ -28,4 +30,6 @@ module := mod.Module{
     state = nil
 }
 
-loop :: proc() {}
+loop :: proc() {
+    draw.clear(255,255,255)
+}
