@@ -36,3 +36,14 @@ init_state_rect_data :: proc() {
     BindBuffer(ARRAY_BUFFER, 0)
     BindVertexArray(0)
 }
+
+unload_state_rect_data :: proc() {
+    using OpenGL
+
+    state := (^Draw_State)(module.state)
+
+    delete_program(state^.types.rect.prog)
+    DeleteBuffers(1, &state^.types.rect.vbo)
+    DeleteVertexArrays(1, &state^.types.rect.vao)
+}
+

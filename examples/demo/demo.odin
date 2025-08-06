@@ -32,4 +32,6 @@ module := mod.Module{
 
 loop :: proc() {
     draw.clear(255,255,255)
+
+    draw.rect(64,64,64,64, 255,0,0)
 }

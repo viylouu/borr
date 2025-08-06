@@ -1,6 +1,9 @@
 package draw
 
+import "../core"
+
 import "core:fmt"
+import "core:math/linalg/glsl"
 import "core:strings"
 
 import "vendor:OpenGL"
@@ -15,32 +18,14 @@ init :: proc() {
 }
 
 unload :: proc() {
-    using OpenGL
+    unload_state_rect_data()
+}
 
+update_proj :: proc() {
     state := (^Draw_State)(module.state)
+    core_state := (^core.Core_State)(core.module.state)
 
-    delete_program(state^.types.rect.prog)
-    DeleteBuffers(1, &state^.types.rect.vbo)
-    DeleteVertexArrays(1, &state^.types.rect.vao)
-}
-
-
-// draw branch todo
-// move below to funcs.odin
-clear_rgba :: proc(r,g,b,a: u8) {
-    using OpenGL
-    ClearColor(f32(r)/255., f32(g)/255., f32(b)/255., f32(a)/255.)
-    Clear(COLOR_BUFFER_BIT)
-}
-clear_rgba_arr :: proc(col: [4]u8) { clear_rgba(col.r,col.g,col.b,col.a) }
-clear_rgb :: proc(r,g,b: u8) { clear_rgba(r,g,b,255) }
-clear_rgb_arr :: proc(col: [3]u8) { clear_rgba(col.r,col.g,col.b,255) }
-
-clear :: proc {
-    clear_rgba,
-    clear_rgba_arr,
-    clear_rgb,
-    clear_rgb_arr,
+    state^.proj = glsl.mat4Ortho3d(0, f32(core_state^.width),f32(core_state^.height), 0, -1000,1000)
 }
 
 
