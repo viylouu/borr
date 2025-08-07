@@ -5,7 +5,6 @@ import "core:slice"
 
 Module :: struct {
     name: string,
-    dependencies: []string,
     init: proc(),
     unload: proc(),
     systems: []^System,
@@ -22,8 +21,6 @@ System :: struct {
 app: []^Module
 
 start :: proc() {
-    check_dependencies()
-
     for mod in app {
         if mod^.init == nil do continue
         mod^.init()
@@ -45,16 +42,3 @@ start :: proc() {
     }
 }
 
-check_dependencies :: proc() {
-    has: map[string]bool
-
-    for mod in app do has[mod^.name] = true
-
-    has_all := true
-    for mod in app do for dep in mod^.dependencies do if !has[dep] {
-        fmt.eprintf("app does not have dependency \"%s\" from module \"%s\"\n", dep, mod^.name)
-        has_all = false
-    }
-
-    assert(has_all, "not all dependencies have been added")
-}

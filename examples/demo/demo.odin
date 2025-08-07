@@ -22,7 +22,6 @@ main :: proc() {
 
 module := mod.Module{
     name = "demo",
-    dependencies = { "core", "draw" },
     systems = {
         &{ name = "render",
             run = loop

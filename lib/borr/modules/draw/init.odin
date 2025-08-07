@@ -7,6 +7,8 @@ import "vendor:OpenGL"
 init_state_rect_data :: proc() {
     using OpenGL
 
+    #assert(#exists("../shader/"))
+
     state := (^Draw_State)(module.state)
 
     state^.types.rect.verts = {
