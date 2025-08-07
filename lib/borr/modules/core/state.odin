@@ -11,20 +11,20 @@ Core_State :: struct {
     gl_minor: int
 }
 
-set_size :: proc(width, height: i32) {
+set_state_size :: proc(width, height: i32) {
     state := (^Core_State)(module.state)
 
     state^.width = width
     state^.height = height
 }
 
-set_title :: proc(title: cstring) {
+set_state_title :: proc(title: cstring) {
     state := (^Core_State)(module.state)
 
     state^.title = title
 }
 
-set_gl_version :: proc(major: int, minor: int) {
+set_state_gl_version :: proc(major: int, minor: int) {
     state := (^Core_State)(module.state)
 
     // minimum gl version 3.3
@@ -37,5 +37,5 @@ set_gl_version :: proc(major: int, minor: int) {
 set_vsync :: proc(state: bool) {
     using glfw
 
-    SwapInterval(cast(i32)state)
+    SwapInterval(state? 1 : 0)
 }
