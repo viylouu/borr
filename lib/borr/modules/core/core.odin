@@ -2,6 +2,8 @@ package core
 
 import mod "../modular"
 
+import "time"
+
 import "vendor:glfw"
 import gl "vendor:OpenGL"
 
@@ -40,8 +42,15 @@ loop :: proc() {
 
     state := (^Core_State)(module.state)
 
+    toff := f32(GetTime())
+    last: f32
+
     for !WindowShouldClose(state^.handle) {
         PollEvents()
+
+        time.time = f32(GetTime()) - toff
+        time.delta = time.time - last
+        last = time.time
 
         for m in mod.app {
             if m == &module do continue
