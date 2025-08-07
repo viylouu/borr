@@ -17,6 +17,8 @@ main :: proc() {
     core.set_title("demo")
     core.set_gl_version(3,3)
 
+    core.set_vsync(true)
+
     mod.start()
 }
 

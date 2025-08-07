@@ -33,3 +33,9 @@ set_gl_version :: proc(major: int, minor: int) {
     state^.gl_major = major
     state^.gl_minor = minor
 }
+
+set_vsync :: proc(state: bool) {
+    using glfw
+
+    SwapInterval(cast(i32)state)
+}
